@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="work.nicey.system.mapper.ApiInterfaceInfoMapper">
+    
+    <resultMap type="ApiInterfaceInfo" id="ApiInterfaceInfoResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="description"    column="description"    />
+        <result property="url"    column="url"    />
+        <result property="requestHeader"    column="request_header"    />
+        <result property="responseHeader"    column="response_header"    />
+        <result property="status"    column="status"    />
+        <result property="method"    column="method"    />
+        <result property="userId"    column="userId"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectApiInterfaceInfoVo">
+        select id, name, description, url, request_header, response_header, status, method, userId, create_time, update_time from api_interface_info
+    </sql>
+
+    <select id="selectApiInterfaceInfoList" parameterType="ApiInterfaceInfo" resultMap="ApiInterfaceInfoResult">
+        <include refid="selectApiInterfaceInfoVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="description != null  and description != ''"> and description = #{description}</if>
+            <if test="url != null  and url != ''"> and url = #{url}</if>
+            <if test="requestHeader != null  and requestHeader != ''"> and request_header = #{requestHeader}</if>
+            <if test="responseHeader != null  and responseHeader != ''"> and response_header = #{responseHeader}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="method != null  and method != ''"> and method = #{method}</if>
+            <if test="userId != null "> and userId = #{userId}</if>
+        </where>
+    </select>
+    
+    <select id="selectApiInterfaceInfoById" parameterType="Long" resultMap="ApiInterfaceInfoResult">
+        <include refid="selectApiInterfaceInfoVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertApiInterfaceInfo" parameterType="ApiInterfaceInfo" useGeneratedKeys="true" keyProperty="id">
+        insert into api_interface_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">name,</if>
+            <if test="description != null">description,</if>
+            <if test="url != null and url != ''">url,</if>
+            <if test="requestHeader != null">request_header,</if>
+            <if test="responseHeader != null">response_header,</if>
+            <if test="status != null">status,</if>
+            <if test="method != null and method != ''">method,</if>
+            <if test="userId != null">userId,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="description != null">#{description},</if>
+            <if test="url != null and url != ''">#{url},</if>
+            <if test="requestHeader != null">#{requestHeader},</if>
+            <if test="responseHeader != null">#{responseHeader},</if>
+            <if test="status != null">#{status},</if>
+            <if test="method != null and method != ''">#{method},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateApiInterfaceInfo" parameterType="ApiInterfaceInfo">
+        update api_interface_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="description != null">description = #{description},</if>
+            <if test="url != null and url != ''">url = #{url},</if>
+            <if test="requestHeader != null">request_header = #{requestHeader},</if>
+            <if test="responseHeader != null">response_header = #{responseHeader},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="method != null and method != ''">method = #{method},</if>
+            <if test="userId != null">userId = #{userId},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteApiInterfaceInfoById" parameterType="Long">
+        delete from api_interface_info where id = #{id}
+    </delete>
+
+    <delete id="deleteApiInterfaceInfoByIds" parameterType="String">
+        delete from api_interface_info where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
