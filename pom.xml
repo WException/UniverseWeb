@@ -172,6 +172,7 @@
         <module>nicey-quartz</module>
         <module>nicey-generator</module>
         <module>nicey-common</module>
+        <module>nicey-interface-sdk</module>
     </modules>
     <packaging>pom</packaging>
 
