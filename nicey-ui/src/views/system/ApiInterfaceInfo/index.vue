@@ -85,7 +85,12 @@
       <el-table-column label="接口地址" align="center" prop="url" />
       <el-table-column label="请求头" align="center" prop="requestHeader" />
       <el-table-column label="响应头" align="center" prop="responseHeader" />
-      <el-table-column label="接口状态" align="center" prop="status" />
+      <el-table-column label="接口状态" align="center" prop="status" >
+        <template slot-scope="scope">
+          <svg-icon v-if="scope.row.status === 1" icon-class="online" style="font-size: 30px" class-name='custom-class' />
+          <svg-icon v-if="scope.row.status === 0" icon-class="offline" style="font-size: 30px" class-name='custom-class' />
+        </template>
+      </el-table-column>
       <el-table-column label="请求类型" align="center" prop="method" />
       <el-table-column label="创建人" align="center" prop="userId" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
