@@ -17,14 +17,14 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="创建人" prop="userId">
-        <el-input
-          v-model="queryParams.userId"
-          placeholder="请输入创建人"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
+<!--      <el-form-item label="创建人" prop="userId">-->
+<!--        <el-input-->
+<!--          v-model="queryParams.userId"-->
+<!--          placeholder="请输入创建人"-->
+<!--          clearable-->
+<!--          @keyup.enter.native="handleQuery"-->
+<!--        />-->
+<!--      </el-form-item>-->
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
@@ -79,7 +79,7 @@
 
     <el-table v-loading="loading" :data="ApiInterfaceInfoList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="主键" align="center" prop="id" />
+<!--      <el-table-column label="主键" align="center" prop="id" />-->
       <el-table-column label="名称" align="center" prop="name" />
       <el-table-column label="描述" align="center" prop="description" />
       <el-table-column label="接口地址" align="center" prop="url" />
@@ -107,7 +107,7 @@
         </template>
       </el-table-column>
     </el-table>
-    
+
     <pagination
       v-show="total>0"
       :total="total"
@@ -137,9 +137,9 @@
         <el-form-item label="请求类型" prop="method">
           <el-input v-model="form.method" placeholder="请输入请求类型" />
         </el-form-item>
-        <el-form-item label="创建人" prop="userId">
-          <el-input v-model="form.userId" placeholder="请输入创建人" />
-        </el-form-item>
+<!--        <el-form-item label="创建人" prop="userId">-->
+<!--          <el-input v-model="form.userId" placeholder="请输入创建人" />-->
+<!--        </el-form-item>-->
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button type="primary" @click="submitForm">确 定</el-button>
@@ -287,6 +287,7 @@ export default {
               this.getList();
             });
           } else {
+            this.form.userId = this.$store.state.user.id;
             addApiInterfaceInfo(this.form).then(response => {
               this.$modal.msgSuccess("新增成功");
               this.open = false;
