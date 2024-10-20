@@ -13,10 +13,13 @@ import work.nicey.common.exception.user.CaptchaExpireException;
 import work.nicey.common.utils.MessageUtils;
 import work.nicey.common.utils.SecurityUtils;
 import work.nicey.common.utils.StringUtils;
+import work.nicey.common.utils.sign.Md5Utils;
 import work.nicey.framework.manager.AsyncManager;
 import work.nicey.framework.manager.factory.AsyncFactory;
 import work.nicey.system.service.ISysConfigService;
 import work.nicey.system.service.ISysUserService;
+
+import java.util.Random;
 
 /**
  * 注册校验方法
@@ -34,6 +37,8 @@ public class SysRegisterService
 
     @Autowired
     private RedisCache redisCache;
+
+    private final String SALT = "iupqwfdb";
 
     /**
      * 注册
@@ -77,6 +82,12 @@ public class SysRegisterService
         {
             sysUser.setNickName(username);
             sysUser.setPassword(SecurityUtils.encryptPassword(password));
+            // 生成 accessKey 和 secretKey
+            Random random = new Random();
+            String accessKey = Md5Utils.hash(username + SALT + random.nextInt(90000));
+            String secretKey = Md5Utils.hash(username + SALT + random.nextInt(9000000));
+            sysUser.setAccessKey(accessKey);
+            sysUser.setSecretKey(secretKey);
             boolean regFlag = userService.registerUser(sysUser);
             if (!regFlag)
             {

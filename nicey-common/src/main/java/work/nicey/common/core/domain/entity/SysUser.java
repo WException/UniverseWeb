@@ -89,6 +89,12 @@ public class SysUser extends BaseEntity
     /** 角色ID */
     private Long roleId;
 
+    /** 密钥 */
+    private String secretKey;
+
+    /** 访问密钥 */
+    private String accessKey;
+
     public SysUser()
     {
 
@@ -295,6 +301,22 @@ public class SysUser extends BaseEntity
     public void setRoleId(Long roleId)
     {
         this.roleId = roleId;
+    }
+
+    public String getSecretKey() {
+        return secretKey;
+    }
+
+    public void setSecretKey(String secretKey) {
+        this.secretKey = secretKey;
+    }
+
+    public String getAccessKey() {
+        return accessKey;
+    }
+
+    public void setAccessKey(String accessKey) {
+        this.accessKey = accessKey;
     }
 
     @Override

@@ -23,6 +23,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="updateBy"     column="update_by"    />
         <result property="updateTime"   column="update_time"  />
         <result property="remark"       column="remark"       />
+        <result property="secretKey"       column="secretKey"       />
+        <result property="accessKey"       column="accessKey"       />
         <association property="dept"    javaType="SysDept"         resultMap="deptResult" />
         <collection  property="roles"   javaType="java.util.List"  resultMap="RoleResult" />
     </resultMap>
@@ -156,6 +158,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="status != null and status != ''">status,</if>
  			<if test="createBy != null and createBy != ''">create_by,</if>
  			<if test="remark != null and remark != ''">remark,</if>
+			<if test="secretKey != null and secretKey != ''">secretKey,</if>
+			<if test="accessKey != null and accessKey != ''">accessKey,</if>
  			create_time
  		)values(
  			<if test="userId != null and userId != ''">#{userId},</if>
@@ -170,6 +174,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="status != null and status != ''">#{status},</if>
  			<if test="createBy != null and createBy != ''">#{createBy},</if>
  			<if test="remark != null and remark != ''">#{remark},</if>
+ 			<if test="secretKey != null and secretKey != ''">#{secretKey},</if>
+ 			<if test="accessKey != null and accessKey != ''">#{accessKey},</if>
  			sysdate()
  		)
 	</insert>
