@@ -87,7 +87,20 @@ export const constantRoutes = [
         meta: { title: '个人中心', icon: 'user' }
       }
     ]
-  }
+  },
+  {
+    path: '/ApiInterfaceInfoByUser',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: 'detail/:id',
+        component: () => import('@/views/system/ApiInterfaceInfoByUser/Detail'),
+        name: 'detail',
+        meta: { title: '接口详情', activeMenu: '/tool/ApiInterfaceInfoByUser' }
+      }
+    ]
+  },
 ]
 
 // 动态路由，基于用户权限动态去加载
